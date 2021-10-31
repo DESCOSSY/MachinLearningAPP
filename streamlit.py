@@ -1,11 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-#import seaborn as sns
 
-# from matplotlib import pyplot as plt
+from matplotlib import pyplot as plt
 from sklearn.model_selection import train_test_split
-
 from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import classification_report
@@ -67,13 +65,10 @@ for name, model in models:
 
 	st.write('%s: %f (%f)' % (name, cv_results.mean(), cv_results.std()))
 
-# print(results)
-# print(names)
 
-
-# plt.boxplot(results, labels=names)
-# plt.title('Algorithm Comparison')
-# st.pyplot()
+plt.boxplot(results, labels=names)
+plt.title('Algorithm Comparison')
+st.pyplot()
 
 model = LogisticRegression(solver='liblinear', multi_class='ovr')
 model.fit(X_train, Y_train)
