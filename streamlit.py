@@ -34,8 +34,13 @@ st.title('Project of Machine Learning.')
 "    - target - have disease or not (1=yes, 0=no)"
 
 dataset = pd.read_csv('./heart.csv')
-df1 = dataset.head(5)
-st.write(df1)
+
+if st.checkbox("Show Dataset"):
+    st.write("### Enter the number of rows to view")
+    rows = st.number_input("", min_value=0,value=5)
+    if rows > 0:
+        st.dataframe(dataset.head(rows))
+
 "Shape of the data:"
 st.write(dataset.shape)
 
@@ -46,7 +51,12 @@ st.pyplot()
 array = dataset.values
 X = array[:, :-1]
 y = array[:,-1]
-X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size=0.20, random_state=1)
+
+st.write("### Enter the number of testing sample")
+size = st.number_input("", min_value=10,value=20, max_value=100)
+st.write("Training sample == ", 100 - size)
+st.write("Testing sample == ", size)
+X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size=(size * 0.01), random_state=1)
 
 models = []
 models.append(('LR', LogisticRegression(solver='liblinear', multi_class='ovr')))
@@ -73,4 +83,5 @@ st.pyplot()
 model = LogisticRegression(solver='liblinear', multi_class='ovr')
 model.fit(X_train, Y_train)
 predictions = model.predict(X_validation)
+st.write("### Result")
 st.write("Test Accuracy : {:.2%}".format(accuracy_score(Y_validation, predictions)))
