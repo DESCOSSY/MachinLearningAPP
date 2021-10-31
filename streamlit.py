@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import seaborn as sns
+#import seaborn as sns
 
 # from matplotlib import pyplot as plt
 from sklearn.model_selection import train_test_split
@@ -74,8 +74,6 @@ for name, model in models:
 # plt.boxplot(results, labels=names)
 # plt.title('Algorithm Comparison')
 # st.pyplot()
-
-ax = sns.boxplot(x=names, y="fff" , data=results)
 
 model = LogisticRegression(solver='liblinear', multi_class='ovr')
 model.fit(X_train, Y_train)
