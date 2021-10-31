@@ -53,10 +53,12 @@ X = array[:, :-1]
 y = array[:,-1]
 
 st.write("### Enter the number of testing sample")
+size = 20
 size = st.number_input("", min_value=10,value=20, max_value=100)
 st.write("Training sample == ", 100 - size)
 st.write("Testing sample == ", size)
-X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size=0.20, random_state=1)
+size = size * 0.01
+X_train, X_validation, Y_train, Y_validation = train_test_split(X, y, test_size=size, random_state=1)
 
 models = []
 models.append(('LR', LogisticRegression(solver='liblinear', multi_class='ovr')))
