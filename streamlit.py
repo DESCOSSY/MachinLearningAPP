@@ -1,8 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import seaborn as sns
 
-from matplotlib import pyplot as plt
+# from matplotlib import pyplot as plt
 from sklearn.model_selection import train_test_split
 
 from sklearn.model_selection import cross_val_score
@@ -66,9 +67,15 @@ for name, model in models:
 
 	st.write('%s: %f (%f)' % (name, cv_results.mean(), cv_results.std()))
 
-plt.boxplot(results, labels=names)
-plt.title('Algorithm Comparison')
-st.pyplot()
+# print(results)
+# print(names)
+
+
+# plt.boxplot(results, labels=names)
+# plt.title('Algorithm Comparison')
+# st.pyplot()
+
+ax = sns.boxplot(x=names, y="fff" , data=results)
 
 model = LogisticRegression(solver='liblinear', multi_class='ovr')
 model.fit(X_train, Y_train)
